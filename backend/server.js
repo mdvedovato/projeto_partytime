@@ -25,14 +25,23 @@ app.use("/api/auth", authRouter);
 app.use("/api/user", verifyToken, userRouter);
 app.use("/api/party", partyRouter);
 
+// mongoose.connect(
+//   "mongodb://localhost/partytime",
+//   {
+//     useNewUrlParser: true,
+//     useFindAndModify: false,
+//     useUnifiedTopology: true
+//   }
+// );
 mongoose.connect(
-  "mongodb://localhost/partytime",
+  "mongodb+srv://admin:123456Aa!@cluster0.8pyvoyw.mongodb.net/partytime?retryWrites=true&w=majority",
   {
     useNewUrlParser: true,
-    useFindAndModify: false,
     useUnifiedTopology: true
   }
-);
+)
+.then(() => console.log("Conectado ao MongoDB Atlas"))
+.catch(err => console.log(err));
 
 app.get("/", (req, res) => {
   res.json({ message: "Rota teste." });
